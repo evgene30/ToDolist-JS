@@ -3,9 +3,57 @@
 */
 
 @font-face {
-  font-family: 'DINP-R';
-  src: url("../fonts/DINPro-Regular.eot?") format("eot"),
-  url("../fonts/DINPro-Regular.woff") format("woff"),
-  url("../fonts/DINPro-Regular.ttf") format("truetype");
-  font-style: normal;
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Black.ttf") format("ttf"),
+        url("../fonts/Roboto-Black.woff") format("woff"),
+        url("../fonts/Roboto-Black.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Bold.ttf") format("ttf"),
+        url("../fonts/Roboto-Bold.woff") format("woff"),
+        url("../fonts/Roboto-Bold.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Light.ttf") format("ttf"),
+        url("../fonts/Roboto-Light.woff") format("woff"),
+        url("../fonts/Roboto-Light.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Medium.ttf") format("ttf"),
+        url("../fonts/Roboto-Medium.woff") format("woff"),
+        url("../fonts/Roboto-Medium.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.ttf") format("ttf"),
+        url("../fonts/Roboto-Regular.woff") format("woff"),
+        url("../fonts/Roboto-Regular.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Thin.ttf") format("ttf"),
+        url("../fonts/Roboto-Thin.woff") format("woff"),
+        url("../fonts/Roboto-Thin.woff2") format("woff2");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Salesforce Sans";
+    src: url("../fonts/SalesforceSans-Regular.ttf") format("ttf"),
+        url("../fonts/SalesforceSans-Regular.woff") format("woff"),
+        url("../fonts/SalesforceSans-Regular.woff2") format("woff2");
+    font-style: normal;
 }
