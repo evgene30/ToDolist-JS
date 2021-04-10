@@ -87,4 +87,42 @@ body {
         top: 33px;
         margin-left: 13px;
     }
+    .header__nav {
+        max-width: 759px;
+        margin-left: 1.1vw;
+        margin-right: 24px;
+    }
+    .header-nav-menu__link {
+        list-style: none;
+        margin-top: 29px;
+        display: flex;
+        justify-content: start;
+        border-top: 1px #e2e2e2 solid;
+
+        a {
+            text-decoration: none;
+            font-weight: 900;
+            color: #a9aaac;
+        }
+
+        li {
+            display: flex;
+            width: 100%;
+            max-width: 175px;
+            height: 30px;
+            padding-top: 33px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        li:hover {
+            border-top: 4px #2f80ed solid;
+            padding-top: 29px;
+            transition: .1s;
+            a {
+                color: #000;
+            }
+        }
+
+    }
 }
