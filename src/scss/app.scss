@@ -118,11 +118,37 @@ body {
         li:hover {
             border-top: 4px $blue solid;
             padding-top: 29px;
-            transition: .1s;
+            transition: 0.1s;
             a {
                 color: $active-dark;
             }
         }
+    }
 
+    .main {
+        width: 100%;
+        max-width: 759px;
+        margin-left: 1.1vw;
+        margin-right: 24px;
+        display: block;
+        padding-top: 35px;
+
+        .form__text {
+            font-family: "Salesforce Sans";
+            font-size: 12px;
+            color: #706e6b;
+            line-height: 15px;
+            padding-bottom: 3px;
+        }
+        .area {
+            width: 100%;
+            max-width:759px;
+        
+            margin-right: 24px;
+           
+        }
+        .area__button {
+            display: block;
+        }
     }
 }
