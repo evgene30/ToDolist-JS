@@ -61,15 +61,15 @@
   },
   "keywords": [
     "webpack",
-    "boilerplate",
+    "ToDo",
     "template",
-    "setup"
+    "list"
   ],
-  "license": "MIT",
+  "license": "",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git@github.com:WeAreAthlon/frontend-webpack-boilerplate.git"
+    "url": ""
   },
   "scripts": {
     "build": "webpack --config configuration/webpack.dev.config.js --mode=development",

@@ -41,13 +41,27 @@ body {
         padding-top: 22px;
         padding-left: 23px;
     }
+
+    .header-sections__items {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
     .image__logo {
         vertical-align: top;
     }
+
+    .header-sections__search {
+        margin-left: 20px;
+        width: 100%;
+        margin-right: 23px;
+    }
+
     .header__input {
-        width: 40.7%;
-        height: 35px;
-        margin-left: 16px;
+        width: 100%;
+        max-width: 580px;
+        height: 36px;
         background: linear-gradient(0deg, #f6f6f6, #f6f6f6), #fefefe;
         border: 1px solid #e2e2e2;
         box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
@@ -55,8 +69,5 @@ body {
         font-family: "Roboto";
         font-weight: 500;
         color: #adadad;
-    }
-    .header-sections__search {
-        display: inline-block;
     }
 }
