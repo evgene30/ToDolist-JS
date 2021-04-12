@@ -24,11 +24,7 @@
 
 body {
     background: $post-background;
-    font-family: "Roboto", "Open Sans", "Helvetica Neue", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    color: $not-active;
+   
 
     .container-page {
         display: block;
@@ -41,6 +37,11 @@ body {
         padding-top: 22px;
         padding-left: 23px;
         // margin: 0 auto;
+        font-family: "Roboto", "Open Sans", "Helvetica Neue", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        color: $not-active;
     }
 
     .header-sections__items {
@@ -71,6 +72,7 @@ body {
         font-weight: 500;
         padding-left: 37px;
         padding-right: 37px;
+        margin-right: -70px;
     }
     .header__input::placeholder {
         color: #adadad;
@@ -118,7 +120,6 @@ body {
         li:hover {
             border-top: 4px $blue solid;
             padding-top: 29px;
-            transition: 0.1s;
             a {
                 color: $active-dark;
             }
@@ -126,12 +127,26 @@ body {
     }
 
     .main {
+        display: block;
         width: 100%;
-        max-width: 759px;
-        margin-left: 1.1vw;
+        margin-left: 0;
         margin-right: 24px;
         display: block;
         padding-top: 35px;
+
+        .main__newtask {
+            width: 100%;
+        }
+
+        .main__form {
+            margin-right: 30px;
+            max-width: 759px;
+            margin-left: 1.1vw;
+
+            p {
+                color: #706e6b;
+            }
+        }
 
         .form__text {
             font-family: "Salesforce Sans";
@@ -142,13 +157,33 @@ body {
         }
         .area {
             width: 100%;
-            max-width:759px;
-        
-            margin-right: 24px;
-           
+            max-width: 759px;
+            border: 1px solid #dddbda;
+            border-radius: 4px;
+            height: 90px;
+            padding: 5px 10px;
+            font-family: "Salesforce Sans";
+            font-size: 14px;
         }
         .area__button {
             display: block;
+            background: $blue;
+            width: 100%;
+            max-width: 191px;
+            height: 36px;
+            margin-top: 11px;
+            font-family: "Roboto";
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            box-shadow: 0px 5px 11px -7px rgba(34, 60, 80, 0.79);
+            float: right;
+
+            &:hover {
+                opacity: 0.6;
+                transition: 0.3s;
+            }
         }
     }
 }
