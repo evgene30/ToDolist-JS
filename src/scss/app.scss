@@ -23,7 +23,8 @@
 @import "dirty/hacks";
 
 body {
-    background: $post-background;
+    background: white;
+    
 
     .container-page {
         display: block;
@@ -35,7 +36,7 @@ body {
         background-position: right 5px bottom 71px;
         padding-top: 22px;
         padding-left: 23px;
-        // margin: 0 auto;
+        margin: 0 auto;
         font-family: "Roboto", sans-serif;
         font-style: normal;
         font-weight: normal;
@@ -204,6 +205,8 @@ body {
                 box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
                 border-radius: 4px;
                 margin-bottom: 17px;
+                padding: 18px 20px;
+                font-weight: 400;
 
                 &:hover {
                     transition: .3s;
@@ -212,6 +215,10 @@ body {
                     box-shadow: 0px 6px 20px rgba(47, 128, 237, 0.5);
                 }
             }
+        }
+        .impotant {
+            font-weight: 700;
+            color: $active-dark;
         }
     }
 }
