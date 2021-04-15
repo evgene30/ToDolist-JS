@@ -77,8 +77,13 @@ body {
         color: #adadad;
     }
 
-    .header__input:hover {
+    .header__input:hover,
+    .header__input:focus {
         color: $active-dark;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        border: 1px solid #ced4da;
     }
 
     .icon__search {
@@ -162,6 +167,15 @@ body {
             padding: 5px 10px;
             font-family: "Salesforce Sans", sans-serif;
             font-size: 14px;
+
+            &:hover,
+            &:focus {
+                color: $active-dark;
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                border: 1px solid #ced4da;
+            }
         }
         .area__button {
             display: block;
