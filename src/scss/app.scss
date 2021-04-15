@@ -80,10 +80,9 @@ body {
     .header__input:hover,
     .header__input:focus {
         color: $active-dark;
-        border-color: #80bdff;
+        border: 1px solid #80bdff;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        border: 1px solid #ced4da;
     }
 
     .icon__search {
@@ -171,10 +170,9 @@ body {
             &:hover,
             &:focus {
                 color: $active-dark;
-                border-color: #80bdff;
+                border: 1px solid #80bdff;
                 outline: 0;
                 box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-                border: 1px solid #ced4da;
             }
         }
         .area__button {
@@ -191,7 +189,8 @@ body {
             box-shadow: 0px 5px 11px -7px rgba(34, 60, 80, 0.79);
             float: right;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 background: #79cbfe;
                 transition: 0.3s;
             }
@@ -227,7 +226,7 @@ body {
                 max-width: 759px;
                 overflow: hidden;
 
-                &:hover {
+                &:hover, &:focus {
                     transition: 0.3s;
                     border: 1px solid rgba(47, 128, 237, 0.5);
                     box-shadow: 0px 6px 20px rgba(47, 128, 237, 0.5);
@@ -236,8 +235,10 @@ body {
                         content: url("../images/content/del.svg");
                         position: relative;
                         left: 100%;
-                        top: -7px;
+                        top: -7px;   
                     }
+
+                
                 }
             }
         }
