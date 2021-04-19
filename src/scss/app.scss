@@ -228,7 +228,7 @@ body {
         margin-bottom: 17px;
         padding-top: 18px;
         padding-bottom: 18px;
-        padding-left: 20px;
+        padding-left: 19px;
         font-weight: 400;
         text-align: start;
         padding-right: 20px;
@@ -265,7 +265,7 @@ body {
             position: relative;
             top: -6px;
             left: -13px;
-            background: #c2c2c2;
+            background: #38b46c;
             border-radius: 50px;
             box-shadow: 1px 4px 7px -2px rgba(34, 60, 80, 0.6);
             color: white;
@@ -277,7 +277,7 @@ body {
           }
 
           .mark-list__item--active {
-            background: #38b46c;
+            background: #c2c2c2;
           }
 
         }
@@ -285,12 +285,20 @@ body {
         .text-list__item--active {
           font-weight: 700;
           color: $active-dark;
+
+          p {
+            margin-left: 24px;
+          }
+
           &::after {
-            display: block;
+            display: inline-block;
             content: url("../images/content/star_border.svg");
             position: relative;
+            bottom: 17px;
+            left: -1px;
           }
         }
+
         .del_button {
           display: none;
         }
@@ -299,10 +307,15 @@ body {
           width: 100%;
           overflow: hidden;
 
+
           p {
             max-width: 759px;
             word-wrap: break-word;
           }
+        }
+
+        .unmarktext {
+          text-decoration: line-through;
         }
 
         .mark-list__item {

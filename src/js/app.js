@@ -16,8 +16,7 @@ if (localStorage.getItem('todoList')) {
 
 // создаем функцию для объекта хранящего наши значения
 btn.addEventListener('click', function () {
-
-  let todoMessage = { // объект сообщения
+  const todoMessage = { // объект сообщения
     todo: inputMsg.value,
     checked: false,
     important: false,
@@ -38,7 +37,7 @@ function vievTodoList() {
     viewMessage += `
         <li class="main-list__item" id = "${indexId}">
             <div class="text"><p>${item.todo}</p></div>
-            <div class="mark-list__item">NOT IMPORTANT</div>
+            <div class="mark-list__item">MARK IMPORTANT</div>
             <div class="del_button" id = "${indexId}">
             <img src="./images/content/del.svg" title="Delete"></div>
         </li>
@@ -49,16 +48,16 @@ function vievTodoList() {
 
 allListens();
 
-function allListens() { // функция поиска кликов по блоку
+function allListens() { // функция поиска кликов по всему блоку сообщений
   let listItems = document.querySelectorAll('.main-list__item');
   listItems.forEach((item) => { // перебираем клики на кнопках
-    delMessage(item);
-    markText(item);
-
+    delMessage(item); // удаление сообщений
+    markText(item); // применение стилей по клику
+    unMarkText(item); // перечеркивание сообщения
   });
 }
 
-function delMessage(buttonClick) { // удаление сообщения
+function delMessage(buttonClick) { // функция удаления сообщений
   buttonClick.querySelector('.del_button')
     .addEventListener('click', function (event) {
       let parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
@@ -69,13 +68,32 @@ function delMessage(buttonClick) { // удаление сообщения
     });
 }
 
-function markText(buttonClick) { // выделяет текст
+function markText(buttonClick) { // функция проверки примененныйх стилей по клику (включение,отключение)
   buttonClick.querySelector('.mark-list__item')
     .addEventListener('click', function (event) {
       let markItem = event.target;
-      markItem.classList.add('mark-list__item--active');
-      markItem.innerHTML = 'MARK IMPORTANT';
-      markItem.previousElementSibling.classList.add('text-list__item--active');
-      console.log(markItem);
+
+      if (markItem.classList.contains('mark-list__item--active')) { // выполняем проверку по наличию класса на элементе
+        markItem.classList.remove('mark-list__item--active');
+        markItem.previousElementSibling.classList.remove('text-list__item--active');
+      } else {
+        markItem.classList.add('mark-list__item--active');
+        markItem.innerHTML = 'NOT IMPORTANT';
+        markItem.previousElementSibling.classList.add('text-list__item--active');
+      }
     });
+}
+
+function unMarkText(blockClick) { // функция перечеркивания сообщений при клике по блоку с сообщением
+  blockClick.querySelector('.text')
+    .addEventListener('click', function (event) {
+      let unMarkItem = event.target;
+
+      if (unMarkItem.classList.contains('unmarktext')) { // выполняем проверку по наличию класса на элементе
+        unMarkItem.classList.remove('unmarktext');
+      } else {
+        unMarkItem.classList.add('unmarktext');
+      }
+    });
+
 }
