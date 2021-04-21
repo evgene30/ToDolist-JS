@@ -37,12 +37,14 @@ function saveInput() {
       };
 
       todoList.unshift(todoMessage); // добавляем объект в массив
-      vievTodoList(); // вызываем функцию отображения при клике
       localSave(); // вызываем функцию сохранения
+
+      vievTodoList(); // вызываем функцию отображения при клике
       inputMsg.value = ''; // очищаем значение ввода
       // eslint-disable-next-line no-empty
+      location.reload();
     } else {
-
+      return;
     }
   });
 }
@@ -117,4 +119,25 @@ function unMarkText(blockClick) { // функция перечеркивания
       }
       localSave();
     });
+}
+
+siteSearch();
+
+function siteSearch() {
+  // Объявляем переменные
+  const input = document.querySelector('#header__id');
+  const ul = document.querySelector('#todoList');
+  let filter = input.value.toUpperCase();
+  let li = ul.getElementsByClassName('main-list__item');
+
+  // Перебирайте все элементы списка и скрывайте те, которые не соответствуют поисковому запросу
+  for (let item = 0; item < li.length; item++) {
+    let a = li[item].getElementsByTagName('a')[0];
+    if (a.innerHTML.toUpperCase()
+      .indexOf(filter) > -1) {
+      li[item].style.display = '';
+    } else {
+      li[item].style.display = 'none';
+    }
+  }
 }
