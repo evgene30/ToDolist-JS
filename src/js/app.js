@@ -1,17 +1,16 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-let btn = document.querySelector('#btn'); // кнопка
-let inputMsg = document.querySelector('#input'); // поле ввода
-let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+const btn = document.querySelector('#btn'); // кнопка
+const inputMsg = document.querySelector('#input'); // поле ввода
+const todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
-
-
 
 // вывод данных из локального хранилища
 getLocal();
 
 function getLocal() {
+  // eslint-disable-next-line no-undef
   if (localStorage.getItem('todoList')) {
     // eslint-disable-next-line no-undef
     todoList = JSON.parse(localStorage.getItem('todoList')); // получаем данные из хранилища и преобразовывам в массив
@@ -19,135 +18,103 @@ function getLocal() {
   }
 }
 
-
 // создаем функцию для хранения данных в локал
 function localSave() {
+  // eslint-disable-next-line no-undef
   localStorage.setItem('todoList', JSON.stringify(todoList));
 }
-
 
 // создаем функцию для воода и сохранения значений, и их отображения в теле документа
 saveInput();
 
 function saveInput() {
-
   btn.addEventListener('click', function () {
     if (inputMsg.value !== '') { // проверка ввода пустой строки
-
       const todoMessage = { // объект сообщения
         todo: inputMsg.value,
         checked: false,
-        important: false,
-      }
+        mark: false,
+      };
 
       todoList.unshift(todoMessage); // добавляем объект в массив
       vievTodoList(); // вызываем функцию отображения при клике
-      localSave();  // вызываем функцию сохранения
-      inputMsg.value = ''; //очищаем значение ввода
+      localSave(); // вызываем функцию сохранения
+      inputMsg.value = ''; // очищаем значение ввода
+      // eslint-disable-next-line no-empty
     } else {
-      return
-    };
 
+    }
   });
 }
-
 
 // визуализируем блокa сообщений, добавляем весь на экран
 function vievTodoList() {
   todoBlock.innerHTML = '';
-  todoList.forEach(function (item, index) { // перебираем элементы, и добавляем id 
-
-    let checkTudo = todoList.value;
-
-
+  todoList.forEach(function (item, index) { // перебираем элементы, и добавляем id
     todoBlock.innerHTML += `
-      <li class="main-list__item" id = "${index}"> 
-          <div class="text"><p>${item.todo}</p></div>
-          <div class="mark-list__item">MARK IMPORTANT</div>
+      <li tabindex="0" class="main-list__item" id = "${index}"> 
+          <div class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
+          <div class="mark-list__item ${item.mark ? 'mark-list__item--active' : ''}">${item.mark ? 'NOT IMPORTANT' : 'IMPORTANT'}</div>
           <div class="del_button">
-          <img src="./images/content/del.svg" title="Delete"></div>
+          <img src="./images/content/del.svg" title="Delete" alt="delete"></div>
       </li>
       `;
   });
 }
 
-
 allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
-  let listItems = document.querySelectorAll('.main-list__item');
+  const listItems = document.querySelectorAll('.main-list__item');
 
   listItems.forEach((item) => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
-
   });
 }
 
 function delMessage(buttonClick) { // функция удаления сообщений
-  buttonClick.querySelector('.del_button').addEventListener('click', function (event) {
-    let parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
-    todoList.splice(parentId.attributes.id.value, 1); // индекс по id для удаления
-    parentId.remove();
-    // eslint-disable-next-line no-undef
-    localSave();
-
-  });
+  buttonClick.querySelector('.del_button')
+    .addEventListener('click', function (event) {
+      const parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
+      todoList.splice(parentId.attributes.id.value, 1); // индекс по id для удаления
+      parentId.remove();
+      // eslint-disable-next-line no-undef
+      localSave();
+    });
 }
 
 function markText(buttonClick) { // функция проверки примененныйх стилей по клику (включение,отключение)
-  buttonClick.querySelector('.mark-list__item').addEventListener('click', function (event) {
-    let markItem = event.target;
-    let idElement = markItem.parentElement.id;
-
-
-    if (markItem.classList.contains('mark-list__item--active')) { // выполняем проверку по наличию класса на элементе
-      markItem.classList.remove('mark-list__item--active');
-      markItem.innerHTML = 'IMPORTANT';
-      markItem.previousElementSibling.classList.remove('text-list__item--active');
-      todoList[idElement].important = false;
-
-
-    } else {
-      markItem.classList.add('mark-list__item--active');
-      markItem.innerHTML = 'NOT IMPORTANT';
-      markItem.previousElementSibling.classList.add('text-list__item--active');
-      todoList[idElement].important = true;
-
-
-    }
-    localSave();
-
-  });
+  buttonClick.querySelector('.mark-list__item')
+    .addEventListener('click', function (item) {
+      if (item.target.classList.contains('mark-list__item--active')) { // выполняем проверку по наличию класса на элементе
+        item.target.classList.remove('mark-list__item--active');
+        // eslint-disable-next-line no-param-reassign
+        item.target.innerHTML = 'IMPORTANT';
+        item.target.previousElementSibling.classList.remove('text-list__item--active');
+        todoList[item.target.parentElement.id].mark = false;
+      } else {
+        item.target.classList.add('mark-list__item--active');
+        // eslint-disable-next-line no-param-reassign
+        item.target.innerHTML = 'NOT IMPORTANT';
+        item.target.previousElementSibling.classList.add('text-list__item--active');
+        todoList[item.target.parentElement.id].mark = true;
+      }
+      localSave();
+    });
 }
 
 function unMarkText(blockClick) { // функция перечеркивания сообщений при клике по блоку с сообщением
-  blockClick.querySelector('.text').addEventListener('click', function (event) {
-    event.target.classList.toggle('unmarktext');
-  });
-
+  blockClick.querySelector('.text')
+    .addEventListener('click', function (event) {
+      if (todoList[event.target.parentElement.id].checked === false) {
+        event.target.classList.toggle('unmarktext');
+        todoList[event.target.parentElement.id].checked = true;
+      } else {
+        event.target.classList.remove('unmarktext');
+        todoList[event.target.parentElement.id].checked = false;
+      }
+      localSave();
+    });
 }
-
-
-  // todoList.forEach(function (item) {
-  //   if (item.important === true) {
-
-  //     console.log(pushStyle)
-
-
-  //     //     element[1].classList.add('mark-list__item--active');
-  //     //     pushStyle.innerHTML = 'NOT IMPORTANT';
-  //     //     pushStyle.previousElementSibling.classList.add('text-list__item--active');
-  //     //     console.log(pushStyle)
-
-  //     //   }
-
-
-  //   };
-
-  // });
-
-
-
-
