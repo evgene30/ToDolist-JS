@@ -23,303 +23,313 @@
 @import "dirty/hacks";
 
 body {
-    background: white;
+  background: white;
 
-    .container-page {
-        display: block;
-        max-width: 1440px;
-        background-color: white;
-        height: 1024px;
-        background-image: url(../images/content/senla_man.svg);
-        background-repeat: no-repeat;
-        background-position: right 5px bottom 71px;
-        padding-top: 22px;
-        padding-left: 23px;
-        margin: 0 auto;
-        font-family: "Roboto", sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        color: $not-active;
+  .container-page {
+    display: block;
+    max-width: 1440px;
+    background-color: white;
+    height: 1024px;
+    background-image: url(../images/content/senla_man.svg);
+    background-repeat: no-repeat;
+    background-position: right 5px bottom 71px;
+    padding-top: 22px;
+    padding-left: 23px;
+    margin: 0 auto;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: $not-active;
+  }
+
+  .header-sections__items {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .image__logo {
+    vertical-align: top;
+  }
+
+  .header-sections__search {
+    margin-left: 20px;
+    width: 100%;
+    margin-right: 98px;
+  }
+
+  .header__input {
+    width: 100%;
+    max-width: 505px;
+    height: 36px;
+    background: linear-gradient(0deg, #f6f6f6, #f6f6f6), #fefefe;
+    border: 1px solid #e2e2e2;
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    padding-left: 37px;
+    padding-right: 37px;
+    margin-right: -70px;
+  }
+
+  .header__input::placeholder {
+    color: #adadad;
+  }
+
+  .header__input:hover,
+  .header__input:focus {
+    color: $active-dark;
+    border: 1px solid #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  .icon__search {
+    position: absolute;
+    z-index: 1;
+    color: #4d4d4d;
+    top: 33px;
+    margin-left: 13px;
+  }
+
+  .header__nav {
+    max-width: 759px;
+    margin-left: 1.1vw;
+    margin-right: 24px;
+  }
+
+  .header-nav-menu__link {
+    list-style: none;
+    margin-top: 29px;
+    display: flex;
+    justify-content: start;
+    border-top: 1px #e2e2e2 solid;
+
+    a {
+      text-decoration: none;
+      font-weight: 900;
+      color: $not-active;
     }
 
-    .header-sections__items {
-        display: inline-flex;
-        flex-wrap: nowrap;
-        width: 100%;
+    li {
+      display: flex;
+      width: 100%;
+      max-width: 175px;
+      height: 30px;
+      padding-top: 33px;
+      justify-content: center;
+      align-items: center;
     }
 
-    .image__logo {
-        vertical-align: top;
+    li:hover {
+      border-top: 4px $blue solid;
+      padding-top: 29px;
+
+      a {
+        color: $active-dark;
+      }
     }
 
-    .header-sections__search {
-        margin-left: 20px;
-        width: 100%;
-        margin-right: 98px;
+    .clickList {
+      border-top: 4px $blue solid;
+      padding-top: 29px;
+
+      a {
+        color: $active-dark;
+      }
+    }
+  }
+
+  .main {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 24px;
+    display: block;
+    padding-top: 35px;
+
+    .main__newtask {
+      width: 100%;
     }
 
-    .header__input {
-        width: 100%;
-        max-width: 505px;
-        height: 36px;
-        background: linear-gradient(0deg, #f6f6f6, #f6f6f6), #fefefe;
-        border: 1px solid #e2e2e2;
-        box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        padding-left: 37px;
-        padding-right: 37px;
-        margin-right: -70px;
+    .main__form {
+      margin-right: 30px;
+      max-width: 759px;
+      margin-left: 1.1vw;
+
+      p {
+        color: #706e6b;
+      }
     }
 
-    .header__input::placeholder {
-        color: #adadad;
+    .form__text {
+      font-family: "Salesforce Sans", sans-serif;
+      font-size: 12px;
+      line-height: 15px;
+      padding-bottom: 3px;
     }
 
-    .header__input:hover,
-    .header__input:focus {
+    .area {
+      width: 100%;
+      max-width: 759px;
+      border: 1px solid #dddbda;
+      border-radius: 4px;
+      height: 90px;
+      padding: 5px 10px;
+      font-family: "Salesforce Sans", sans-serif;
+      font-size: 14px;
+
+      &:hover,
+      &:focus {
         color: $active-dark;
         border: 1px solid #80bdff;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
     }
 
-    .icon__search {
-        position: absolute;
-        z-index: 1;
-        color: #4d4d4d;
-        top: 33px;
-        margin-left: 13px;
+
+    .area__button {
+      display: block;
+      background: $blue;
+      width: 25%;
+      height: 36px;
+      margin-top: 11px;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      color: white;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0px 5px 11px -7px rgba(34, 60, 80, 0.79);
+      float: right;
+
+      &:hover,
+      &:focus {
+        background: #79cbfe;
+        transition: 0.3s;
+      }
     }
 
-    .header__nav {
-        max-width: 759px;
-        margin-left: 1.1vw;
-        margin-right: 24px;
-    }
+    .main__task {
+      //секция 2
+      display: block;
+      max-width: 759px;
+      padding-top: 69px;
+      margin-right: 30px;
+      margin-left: 1.1vw;
 
-    .header-nav-menu__link {
-        list-style: none;
-        margin-top: 29px;
-        display: flex;
-        justify-content: start;
-        border-top: 1px #e2e2e2 solid;
-
-        a {
-            text-decoration: none;
-            font-weight: 900;
-            color: $not-active;
-        }
-
-        li {
-            display: flex;
-            width: 100%;
-            max-width: 175px;
-            height: 30px;
-            padding-top: 33px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        li:hover {
-            border-top: 4px $blue solid;
-            padding-top: 29px;
-
-            a {
-                color: $active-dark;
-            }
-        }
-    }
-
-    .main {
-        display: block;
+      .main-list__items {
+        display: flexbox;
         width: 100%;
-        margin-left: 0;
-        margin-right: 24px;
-        display: block;
-        padding-top: 35px;
+        max-width: 759px;
+        align-items: center;
+      }
 
-        .main__newtask {
-            width: 100%;
-        }
+      .main-list__item {
+        display: flex;
+        width: 100%;
+        max-width: 759px;
+        height: 109px;
+        background: #ffffff;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        margin-bottom: 17px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        padding-left: 19px;
+        font-weight: 400;
+        text-align: start;
+        padding-right: 20px;
+        max-width: 759px;
+        overflow: hidden;
 
-        .main__form {
-            margin-right: 30px;
-            max-width: 759px;
-            margin-left: 1.1vw;
+        &:hover,
+        &:focus {
+          // transition: 0.3s;
+          border: 1px solid rgba(47, 128, 237, 0.5);
+          box-shadow: 0px 6px 20px rgba(47, 128, 237, 0.5);
+          padding: 17px 19px 17px 19px;
 
-            p {
-                color: #706e6b;
-            }
-        }
-
-        .form__text {
-            font-family: "Salesforce Sans", sans-serif;
-            font-size: 12px;
-            line-height: 15px;
-            padding-bottom: 3px;
-        }
-
-        .area {
-            width: 100%;
-            max-width: 759px;
-            border: 1px solid #dddbda;
-            border-radius: 4px;
-            height: 90px;
-            padding: 5px 10px;
-            font-family: "Salesforce Sans", sans-serif;
-            font-size: 14px;
+          .del_button {
+            display: block;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            top: -7px;
+            left: 9px;
+            border-radius: 50%;
+            cursor: pointer;
 
             &:hover,
             &:focus {
-                color: $active-dark;
-                border: 1px solid #80bdff;
-                outline: 0;
-                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+              box-shadow: 0px 0px 7px rgba(255, 0, 0, 0.993);
             }
-        }
+          }
 
-
-        .area__button {
-            display: block;
-            background: $blue;
-            width: 25%;
+          .mark-list__item {
+            display: flex;
+            width: 36.5%;
             height: 36px;
-            margin-top: 11px;
-            font-family: "Roboto", sans-serif;
-            font-size: 14px;
+            position: relative;
+            top: -6px;
+            left: -13px;
+            background: #38b46c;
+            border-radius: 50px;
+            box-shadow: 1px 4px 7px -2px rgba(34, 60, 80, 0.6);
             color: white;
-            text-decoration: none;
-            border: none;
-            box-shadow: 0px 5px 11px -7px rgba(34, 60, 80, 0.79);
-            float: right;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8vmax;
+            cursor: pointer;
+          }
 
-            &:hover,
-            &:focus {
-                background: #79cbfe;
-                transition: 0.3s;
-            }
+          .mark-list__item--active {
+            background: #c2c2c2;
+          }
         }
 
-        .main__task {
-            //секция 2
-            display: block;
+        .text-list__item--active {
+          font-weight: 700;
+          color: $active-dark;
+
+          p {
+            margin-left: 24px;
+          }
+
+          &::after {
+            display: inline-block;
+            content: url("../images/content/star_border.svg");
+            position: relative;
+            bottom: 17px;
+            left: -1px;
+          }
+        }
+
+        .del_button {
+          display: none;
+        }
+
+        .text {
+          width: 100%;
+          overflow: hidden;
+
+          p {
             max-width: 759px;
-            padding-top: 69px;
-            margin-right: 30px;
-            margin-left: 1.1vw;
-
-            .main-list__items {
-                display: flexbox;
-                width: 100%;
-                max-width: 759px;
-                align-items: center;
-            }
-
-            .main-list__item {
-                display: flex;
-                width: 100%;
-                max-width: 759px;
-                height: 109px;
-                background: #ffffff;
-                box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-                border-radius: 4px;
-                margin-bottom: 17px;
-                padding-top: 18px;
-                padding-bottom: 18px;
-                padding-left: 19px;
-                font-weight: 400;
-                text-align: start;
-                padding-right: 20px;
-                max-width: 759px;
-                overflow: hidden;
-
-                &:hover,
-                &:focus {
-                    // transition: 0.3s;
-                    border: 1px solid rgba(47, 128, 237, 0.5);
-                    box-shadow: 0px 6px 20px rgba(47, 128, 237, 0.5);
-                    padding: 17px 19px 17px 19px;
-
-                    .del_button {
-                        display: block;
-                        width: 40px;
-                        height: 40px;
-                        position: relative;
-                        top: -7px;
-                        left: 9px;
-                        border-radius: 50%;
-                        cursor: pointer;
-
-                        &:hover,
-                        &:focus {
-                            box-shadow: 0px 0px 7px rgba(255, 0, 0, 0.993);
-                        }
-                    }
-
-                    .mark-list__item {
-                        display: flex;
-                        width: 36.5%;
-                        height: 36px;
-                        position: relative;
-                        top: -6px;
-                        left: -13px;
-                        background: #38b46c;
-                        border-radius: 50px;
-                        box-shadow: 1px 4px 7px -2px rgba(34, 60, 80, 0.6);
-                        color: white;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 0.8vmax;
-                        cursor: pointer;
-                    }
-
-                    .mark-list__item--active {
-                        background: #c2c2c2;
-                    }
-                }
-
-                .text-list__item--active {
-                    font-weight: 700;
-                    color: $active-dark;
-
-                    p {
-                        margin-left: 24px;
-                    }
-
-                    &::after {
-                        display: inline-block;
-                        content: url("../images/content/star_border.svg");
-                        position: relative;
-                        bottom: 17px;
-                        left: -1px;
-                    }
-                }
-
-                .del_button {
-                    display: none;
-                }
-
-                .text {
-                    width: 100%;
-                    overflow: hidden;
-
-                    p {
-                        max-width: 759px;
-                        word-wrap: break-word;
-                    }
-                }
-
-                .unmarktext {
-                    text-decoration: line-through;
-                }
-
-                .mark-list__item {
-                    display: none;
-                }
-            }
+            word-wrap: break-word;
+          }
         }
+
+        .unmarktext {
+          text-decoration: line-through;
+        }
+
+        .mark-list__item {
+          display: none;
+        }
+      }
     }
+  }
 }
+

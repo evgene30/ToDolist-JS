@@ -23,15 +23,15 @@
         </div>
         <div class="header-sections__search">
           <span class="icon__search"><img src="./images/content/search_image.svg" alt="search_img"></i></span>
-          <input class="header__input" type="search" placeholder="Search task for to do" required id="header__id" tabindex="1">
+          <input class="header__input"  type="search" placeholder="Search task for to do"  id="header__id" tabindex="0">
         </div>
       </section>
       <section class="header__nav nav__menu" id="header__nav">
         <nav class="header-nav__menu">
           <ul class="header-nav-menu__link">
-            <li id="all"><a href="#">All</a></li>
-            <li id="active"><a href="#">Active</a></li>
-            <li id="done"><a href="#">Done</a></li>
+            <li id="all" tabindex="1"><a href="#">All</a></li>
+            <li id="active" tabindex="2"><a href="#">Active</a></li>
+            <li id="done" tabindex="3"><a href="#">Done</a></li>
           </ul>
         </nav>
       </section>
@@ -43,7 +43,7 @@
 
         <form id="taskform" class="main__form">
           <p class="form__text">New Task</p>
-          <textarea name="text__area" class="area" id="input" tabindex="2" required></textarea>
+          <textarea name="text__area" class="area" id="input" tabindex="4" required></textarea>
           <button class="area__button" id="btn" type="submit">ADD</button>
         </form>
 
@@ -51,7 +51,7 @@
 
       <section class="main__task" id="main__list">
 
-        <ul class="main-list__items" id="todoList" tabindex="3">
+        <ul class="main-list__items" id="todoList" tabindex="5">
 
        </ul>
 

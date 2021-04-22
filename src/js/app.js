@@ -1,9 +1,9 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-const btn = document.querySelector('#btn'); // кнопка
-const inputMsg = document.querySelector('#input'); // поле ввода
-const todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+let btn = document.querySelector('#btn'); // кнопка
+let inputMsg = document.querySelector('#input'); // поле ввода
+let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
 
 // вывод данных из локального хранилища
@@ -38,7 +38,6 @@ function saveInput() {
 
       todoList.unshift(todoMessage); // добавляем объект в массив
       localSave(); // вызываем функцию сохранения
-
       vievTodoList(); // вызываем функцию отображения при клике
       inputMsg.value = ''; // очищаем значение ввода
       // eslint-disable-next-line no-empty
@@ -53,10 +52,10 @@ function vievTodoList() {
   todoBlock.innerHTML = '';
   todoList.forEach(function (item, index) { // перебираем элементы, и добавляем id
     todoBlock.innerHTML += `
-      <li tabindex="0" class="main-list__item" id = "${index}"> 
-          <div class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
-          <div class="mark-list__item ${item.mark ? 'mark-list__item--active' : ''}">${item.mark ? 'NOT IMPORTANT' : 'IMPORTANT'}</div>
-          <div class="del_button">
+      <li tabindex="0" class="main-list__item" id = "${index}" tabindex="6"> 
+          <div tabindex="7" class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
+          <div tabindex="8" class="mark-list__item ${item.mark ? 'mark-list__item--active' : ''}">${item.mark ? 'NOT IMPORTANT' : 'IMPORTANT'}</div>
+          <div class="del_button" tabindex="9">
           <img src="./images/content/del.svg" title="Delete" alt="delete"></div>
       </li>
       `;
@@ -66,7 +65,7 @@ function vievTodoList() {
 allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
-  const listItems = document.querySelectorAll('.main-list__item');
+  let listItems = document.querySelectorAll('.main-list__item');
 
   listItems.forEach((item) => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
@@ -78,11 +77,12 @@ function allListens() { // функция поиска кликов по все�
 function delMessage(buttonClick) { // функция удаления сообщений
   buttonClick.querySelector('.del_button')
     .addEventListener('click', function (event) {
-      const parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
+      let parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
       todoList.splice(parentId.attributes.id.value, 1); // индекс по id для удаления
       parentId.remove();
       // eslint-disable-next-line no-undef
       localSave();
+      // eslint-disable-next-line no-undef,no-restricted-globals
       location.reload();
     });
 }
@@ -124,20 +124,31 @@ function unMarkText(blockClick) { // функция перечеркивания
 siteSearch();
 
 function siteSearch() {
-  // Объявляем переменные
-  const input = document.querySelector('#header__id');
-  const ul = document.querySelector('#todoList');
-  let filter = input.value.toUpperCase();
-  let li = ul.getElementsByClassName('main-list__item');
+  document.querySelector('#header__id').oninput = function () {
+    let value = this.value.trim(); // значение ввода
+    let itemsSerch = document.querySelectorAll('#todoList li');
+    if (value !== '') {
+      itemsSerch.forEach(function (element) {
 
-  // Перебирайте все элементы списка и скрывайте те, которые не соответствуют поисковому запросу
-  for (let item = 0; item < li.length; item++) {
-    let a = li[item].getElementsByTagName('a')[0];
-    if (a.innerHTML.toUpperCase()
-      .indexOf(filter) > -1) {
-      li[item].style.display = '';
+        if (element.innerText.search(value) == -1) {
+          element.style.display = 'none'; //убираем не подходящие блоки
+        } else {
+          element.style.display = 'flex';
+        }
+      });
     } else {
-      li[item].style.display = 'none';
+      itemsSerch.forEach(function (element) {
+        element.style.display = 'flex'; // возвращаем обратное значение
+
+      });
     }
-  }
+  };
+}
+
+allActive();
+
+function allActive() {
+  let active = document.querySelector('#active').addEventListener('click', function (item) {
+    console.log(item.target.classList.add('clickList'));
+  });
 }
