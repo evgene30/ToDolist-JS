@@ -42,7 +42,6 @@ function saveInput() {
       vievTodoList(); // вызываем функцию отображения при клике
       inputMsg.value = ''; // очищаем значение ввода
       // eslint-disable-next-line no-empty
-      location.reload();
     } else {
       return;
     }
@@ -84,6 +83,7 @@ function delMessage(buttonClick) { // функция удаления сообщ
       parentId.remove();
       // eslint-disable-next-line no-undef
       localSave();
+      location.reload();
     });
 }
 
