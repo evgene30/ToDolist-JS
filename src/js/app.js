@@ -146,28 +146,68 @@ function siteSearch() {
 
 allActive();
 
-function allActive() { // функция поиска кликов по всему блоку cсылок
+function allActive() {
+
+
+  // let listItems = document.querySelectorAll('.header-nav-menu__link li a');
+
+  // listItems.forEach((item) => {
+
+  //   item.addEventListener("click", function() {
+  //     console.log(item)
+  //     // let current = querySelector("active");
+  //     // item.className = i.className.replace(" active", "");
+  //     // this.className += " active";
+  //   });
+  // });
+
+
+
+  
   let listItems = document.querySelectorAll('.header-nav-menu__link li a');
   listItems.forEach((item) => { // перебираем клики на кнопках
-    if (item.parentElement.id === 'all') {
+
+
+
+    if (item.parentElement.id === 'all' ? 'active' : '') {
       item.addEventListener('click', function (item) {
-        item.target.classList.add('clickList');
+        item.target.classList.remove('active');
+        console.log(item.target)
+       
+
+
 
       });
-    }
-    if (item.parentElement.id === 'active') {
-      item.addEventListener('click', function (item) {
-        item.target.classList.add('clickList');
-        console.log(item.target);
+    } 
 
+
+    if (item.parentElement.id === 'active' ) {
+      item.addEventListener('click', function (item) {
+        if (item.target.classList.contains('active')) {
+          item.target.classList.remove('active');
+          alert('hi')
+
+        } else {
+          item.target.classList.add('active');
+        }
       });
     }
-    if (item.parentElement.id === 'done') {
+
+
+    if (item.parentElement.id === 'done' ? 'active' : '') {
       item.addEventListener('click', function (item) {
-        item.target.classList.add('clickList');
+        if (item.target.classList.contains('active')) {
+          item.target.classList.remove('active');
+          alert('hi')
+
+        } else {
+          item.target.classList.add('active');
+        }
 
       });
+
     }
+
   });
 }
 

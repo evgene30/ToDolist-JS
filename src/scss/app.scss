@@ -113,6 +113,23 @@ body {
       color: $not-active;
     }
 
+    .nonclick {
+      display: flex;
+      width: 100%;
+      max-width: 175px;
+      height: 30px;
+      padding-top: 29px;
+      justify-content: center;
+      align-items: center;
+      margin-top: -33px;
+    }
+
+    li:hover {
+      a {
+        color: $active-dark;
+      }
+    }
+
     li {
       display: flex;
       width: 100%;
@@ -129,7 +146,7 @@ body {
       }
     }
 
-    .clickList {
+    .active {
       border-top: 4px $blue solid;
       display: flex;
       padding-top: 29px;
@@ -139,9 +156,9 @@ body {
       justify-content: center;
       align-items: center;
       color: $active-dark;
-      margin-top: -33px;
+      margin-top: -35px;
       a {
-
+        color: $active-dark;
       }
     }
   }
