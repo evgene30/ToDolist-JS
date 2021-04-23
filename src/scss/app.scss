@@ -124,9 +124,6 @@ body {
     }
 
     li:hover {
-      border-top: 4px $blue solid;
-      padding-top: 29px;
-
       a {
         color: $active-dark;
       }
@@ -134,10 +131,17 @@ body {
 
     .clickList {
       border-top: 4px $blue solid;
+      display: flex;
       padding-top: 29px;
-
+      width: 100%;
+      max-width: 175px;
+      height: 30px;
+      justify-content: center;
+      align-items: center;
+      color: $active-dark;
+      margin-top: -33px;
       a {
-        color: $active-dark;
+
       }
     }
   }

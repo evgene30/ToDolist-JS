@@ -139,7 +139,6 @@ function siteSearch() {
     } else {
       itemsSerch.forEach(function (element) {
         element.style.display = 'flex'; // возвращаем обратное значение
-
       });
     }
   };
@@ -147,8 +146,29 @@ function siteSearch() {
 
 allActive();
 
-function allActive() {
-  let active = document.querySelector('#active').addEventListener('click', function (item) {
-    console.log(item.target.classList.add('clickList'));
+function allActive() { // функция поиска кликов по всему блоку cсылок
+  let listItems = document.querySelectorAll('.header-nav-menu__link li a');
+  listItems.forEach((item) => { // перебираем клики на кнопках
+    if (item.parentElement.id === 'all') {
+      item.addEventListener('click', function (item) {
+        item.target.classList.add('clickList');
+
+      });
+    }
+    if (item.parentElement.id === 'active') {
+      item.addEventListener('click', function (item) {
+        item.target.classList.add('clickList');
+        console.log(item.target);
+
+      });
+    }
+    if (item.parentElement.id === 'done') {
+      item.addEventListener('click', function (item) {
+        item.target.classList.add('clickList');
+
+      });
+    }
   });
 }
+
+
