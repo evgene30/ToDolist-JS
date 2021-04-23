@@ -1,12 +1,12 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-let btn = document.querySelector('#btn'); // кнопка
+let btn = document.querySelector('#btn'); // кнопка добавить
 let inputMsg = document.querySelector('#input'); // поле ввода
 let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
 
-// вывод данных из локального хранилища
+// отображение данных из локального хранилища
 getLocal();
 
 function getLocal() {
@@ -18,7 +18,7 @@ function getLocal() {
   }
 }
 
-// создаем функцию для хранения данных в локал
+// создаем функцию для сохраниния данных в локал
 function localSave() {
   // eslint-disable-next-line no-undef
   localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -47,15 +47,16 @@ function saveInput() {
   });
 }
 
-// визуализируем блокa сообщений, добавляем весь на экран
+// визуализируем блок сообщения, добавляем на экран
 function vievTodoList() {
   todoBlock.innerHTML = '';
+
   todoList.forEach(function (item, index) { // перебираем элементы, и добавляем id
     todoBlock.innerHTML += `
-      <li tabindex="0" class="main-list__item" id = "${index}" tabindex="6"> 
-          <div tabindex="7" class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
-          <div tabindex="8" class="mark-list__item ${item.mark ? 'mark-list__item--active' : ''}">${item.mark ? 'NOT IMPORTANT' : 'IMPORTANT'}</div>
-          <div class="del_button" tabindex="9">
+      <li tabindex="0" class="main-list__item" id = "${index}"> 
+          <div tabindex="-1" class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
+          <div tabindex="-1" class="mark-list__item ${item.mark ? 'mark-list__item--active' : ''}">${item.mark ? 'NOT IMPORTANT' : 'IMPORTANT'}</div>
+          <div tabindex="-1" class="del_button" tabindex="9">
           <img src="./images/content/del.svg" title="Delete" alt="delete"></div>
       </li>
       `;
@@ -75,6 +76,7 @@ function allListens() { // функция поиска кликов по все�
 }
 
 function delMessage(buttonClick) { // функция удаления сообщений
+
   buttonClick.querySelector('.del_button')
     .addEventListener('click', function (event) {
       let parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
@@ -123,7 +125,7 @@ function unMarkText(blockClick) { // функция перечеркивания
 
 siteSearch();
 
-function siteSearch() {
+function siteSearch() { // функция поиска
   document.querySelector('#header__id').oninput = function () {
     let value = this.value.trim(); // значение ввода
     let itemsSerch = document.querySelectorAll('#todoList li');
@@ -144,70 +146,72 @@ function siteSearch() {
   };
 }
 
-allActive();
+activeLink();
 
-function allActive() {
+function activeLink() { // функция примнения активных стилей ко вкладкам в гланом меню
+  let listItem = document.getElementById('list'); // находим список
+  let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
+
+  for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
+    listITems[i].addEventListener("click", function () {
+      let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
+      elem[0].className = listITems[0].className.replace(" active", "");
+      this.className += " active"; // присваиваем по клику активный класс текущему элементу
+    });
+  }
+}
+
+activeClick();
+
+function activeClick() { // функция применения действий по вкладкам
+  let delForm = document.querySelector('#taskform');
+  let textMark = document.querySelectorAll('.unmarktext');
+  let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
+  let impButtom = document.querySelectorAll('.mark-list__item');
+
+  listItems.forEach((item) => { // перебираем их
+    item.parentElement.style.display = 'flex';
+    if (item.parentElement.id === 'all') { // проверка по id
+      item.addEventListener('click', function () {
+        delForm.style.display = 'block';
+        impButtom.forEach(function(elem){
+          elem.style.display = 'block';
+        })
+        textMark.forEach(function (element) {
+          element.parentElement.style.display = 'flex';   
+        })
+      });
+    }
+
+    if (item.parentElement.id === 'done') {
+      item.addEventListener('click', function () {
+        delForm.style.display = 'none';
+        impButtom.forEach(function(elem){
+          elem.style.display = 'none';
+        })
+        
+        
 
 
-  // let listItems = document.querySelectorAll('.header-nav-menu__link li a');
+      });
+    }
 
-  // listItems.forEach((item) => {
-
-  //   item.addEventListener("click", function() {
-  //     console.log(item)
-  //     // let current = querySelector("active");
-  //     // item.className = i.className.replace(" active", "");
-  //     // this.className += " active";
-  //   });
-  // });
-
-
-
+    if (item.parentElement.id === 'active') {
+      item.addEventListener('click', function () {
+        delForm.style.display = 'block';
+        impButtom.forEach(function(elem){
+          elem.style.display = 'block';
+        })
   
-  let listItems = document.querySelectorAll('.header-nav-menu__link li a');
-  listItems.forEach((item) => { // перебираем клики на кнопках
-
-
-
-    if (item.parentElement.id === 'all' ? 'active' : '') {
-      item.addEventListener('click', function (item) {
-        item.target.classList.remove('active');
-        console.log(item.target)
-       
-
-
-
-      });
-    } 
-
-
-    if (item.parentElement.id === 'active' ) {
-      item.addEventListener('click', function (item) {
-        if (item.target.classList.contains('active')) {
-          item.target.classList.remove('active');
-          alert('hi')
-
-        } else {
-          item.target.classList.add('active');
-        }
+        textMark.forEach(function (element) {
+          if (element.classList.contains(' unmarktext')) {
+            element.parentElement.style.display = 'flex';
+          } else {
+            element.parentElement.style.display = 'none';
+          }
+        });
       });
     }
-
-
-    if (item.parentElement.id === 'done' ? 'active' : '') {
-      item.addEventListener('click', function (item) {
-        if (item.target.classList.contains('active')) {
-          item.target.classList.remove('active');
-          alert('hi')
-
-        } else {
-          item.target.classList.add('active');
-        }
-
-      });
-
-    }
-
   });
 }
 

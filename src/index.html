@@ -28,10 +28,10 @@
       </section>
       <section class="header__nav nav__menu" id="header__nav">
         <nav class="header-nav__menu">
-          <ul class="header-nav-menu__link">
-            <li id="all" tabindex="1"><a class="nonclick active" href="#">All</a></li>
-            <li id="active" tabindex="2"><a class="nonclick" href="#">Active</a></li>
-            <li id="done" tabindex="3"><a class="nonclick" href="#">Done</a></li>
+          <ul class="header-nav-menu__link" id="list">
+            <li id="all" tabindex="0"><a class="nonclick active" href="#">All</a></li>
+            <li id="active" tabindex="0"><a class="nonclick" href="#">Active</a></li>
+            <li id="done" tabindex="0"><a class="nonclick" href="#">Done</a></li>
           </ul>
         </nav>
       </section>
@@ -43,7 +43,7 @@
 
         <form id="taskform" class="main__form">
           <p class="form__text">New Task</p>
-          <textarea name="text__area" class="area" id="input" tabindex="4" required></textarea>
+          <textarea name="text__area" class="area" id="input" tabindex="0" required></textarea>
           <button class="area__button" id="btn" type="submit">ADD</button>
         </form>
 
@@ -51,7 +51,7 @@
 
       <section class="main__task" id="main__list">
 
-        <ul class="main-list__items" id="todoList" tabindex="5">
+        <ul class="main-list__items" id="todoList" tabindex="0">
 
        </ul>
 
