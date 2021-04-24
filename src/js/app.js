@@ -1,26 +1,28 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-const btn = document.querySelector('#btn'); // кнопка добавить
-const inputMsg = document.querySelector('#input'); // поле ввода
-const todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+let btn = document.querySelector('#btn'); // кнопка добавить
+let inputMsg = document.querySelector('#input'); // поле ввода
+let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+let delForm = document.querySelector('#taskform');
+let textMark = document.querySelectorAll('.unmarktext');
+let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
+let impButtom = document.querySelectorAll('.mark-list__item');
 let todoList = []; // массив хранения объектов ввода
 
 // отображение данных из локального хранилища
 getLocal();
 
 function getLocal() {
-  // eslint-disable-next-line no-undef
-  if (localStorage.getItem('todoList')) {
-    // eslint-disable-next-line no-undef
+  if (localStorage.getItem('todoList') != undefined) {
     todoList = JSON.parse(localStorage.getItem('todoList')); // получаем данные из хранилища и преобразовывам в массив
     vievTodoList(); // вызываем функцию отображения
   }
 }
 
+
 // создаем функцию для сохраниния данных в локал
 function localSave() {
-  // eslint-disable-next-line no-undef
   localStorage.setItem('todoList', JSON.stringify(todoList));
 }
 
@@ -28,26 +30,29 @@ function localSave() {
 saveInput();
 
 function saveInput() {
+
   btn.addEventListener('click', function () {
-    if (inputMsg.value !== '') { // проверка ввода пустой строки
-      const todoMessage = { // объект сообщения
-        todo: inputMsg.value,
-        checked: false,
-        mark: false,
-      };
 
-      todoList.unshift(todoMessage); // добавляем объект в массив
-      vievTodoList(); // вызываем функцию отображения при клике
-      localSave(); // вызываем функцию сохранения
-      inputMsg.value = ''; // очищаем значение ввода
-      // eslint-disable-next-line no-empty
-    } else {
+    if (!inputMsg.value) return; // проверка ввода пустой строки
 
-    }
+    let todoMessage = { // объект сообщения
+      todo: inputMsg.value,
+      checked: false,
+      mark: false,
+    };
+
+    todoList.unshift(todoMessage); // добавляем объект в массив
+
+    vievTodoList(); // вызываем функцию отображения при клике
+    inputMsg.value = ''; // очищаем значение ввода
+    localSave(); // вызываем функцию сохранения
+    allListens();
+
   });
 }
 
 // визуализируем блок сообщения, добавляем на экран
+
 function vievTodoList() {
   todoBlock.innerHTML = '';
 
@@ -60,6 +65,7 @@ function vievTodoList() {
           <img src="./images/content/del.svg" title="Delete" alt="delete"></div>
       </li>
       `;
+    todoList.innerHTML = todoBlock;
   });
 }
 
@@ -67,10 +73,13 @@ allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
   const listItems = document.querySelectorAll('.main-list__item');
-  listItems.forEach((item) => { // перебираем клики на кнопках
+  listItems.forEach(item => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
+    activeClick();
+
+
   });
 }
 
@@ -144,17 +153,18 @@ function siteSearch() { // функция поиска
     }
   };
 }
+inputMsg.addEventListener("input", siteSearch); // отфильтровка остаточных значений
 
 activeLink();
 
 function activeLink() { // функция примнения активных стилей ко вкладкам в гланом меню
-  const listItem = document.getElementById('list'); // находим список
-  const listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
+  let listItem = document.getElementById('list'); // находим список
+  let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
     listITems[i].addEventListener('click', function () {
-      const elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
+      let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
       elem[0].className = listITems[0].className.replace(' active', '');
       this.className += ' active'; // присваиваем по клику активный класс текущему элементу
     });
@@ -164,20 +174,13 @@ function activeLink() { // функция примнения активных с
 activeClick();
 
 function activeClick() { // функция применения действий по вкладкам
-  const delForm = document.querySelector('#taskform');
-  const textMark = document.querySelectorAll('.unmarktext');
-  const listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
-  const impButtom = document.querySelectorAll('.mark-list__item');
-
 
   listItems.forEach((item) => { // перебираем их
-    // eslint-disable-next-line no-param-reassign
-    item.parentElement.style.display = 'flex';
+
     if (item.parentElement.id === 'all') { // проверка по id
       item.addEventListener('click', function () {
         delForm.style.display = 'block';
         impButtom.forEach(function (elem) {
-          // eslint-disable-next-line no-param-reassign
           elem.style.visibility = 'visible';
         });
         textMark.forEach(function (element) {
@@ -186,24 +189,22 @@ function activeClick() { // функция применения действий
       });
     }
 
+
     if (item.parentElement.id === 'done') {
-      item.addEventListener('click', function () {
+      item.addEventListener('click', function (elem) {
         delForm.style.display = 'none';
         impButtom.forEach(function (elem) {
           elem.style.visibility = 'hidden';
         });
 
-
         textMark.forEach(function (element) {
-          if (element.classList.contains(' unmarktext') === false) {
+          if (element.classList.contains(' unmarktext') !== false) {
             element.parentElement.style.display = 'flex';
             console.log()
           } else {
             element.parentElement.style.display = 'none';
           }
         });
-
-
 
       });
     }
@@ -214,14 +215,23 @@ function activeClick() { // функция применения действий
         impButtom.forEach(function (elem) {
           elem.style.visibility = 'visible';
         });
+
+
         textMark.forEach(function (element) {
-          if (element.classList.contains(' unmarktext')) {
-            element.parentElement.style.overflow = 'flex';
-          } else {
-            element.parentElement.style.display = 'none';
-          }
+          console.log(element)
+          // if (element.classList.contains(' unmarktext')) {
+          //   console.log('false')
+
+          //   element.parentElement.style.display = 'flex';
+          // } else {
+          //   element.parentElement.style.display = 'none';
+          //   console.log('true')
+          // }
         });
+
       });
     }
   });
 }
+
+
