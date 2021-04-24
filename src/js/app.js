@@ -5,9 +5,6 @@ let btn = document.querySelector('#btn'); // кнопка добавить
 let inputMsg = document.querySelector('#input'); // поле ввода
 let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let delForm = document.querySelector('#taskform');
-let textMark = document.querySelectorAll('.unmarktext');
-let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
-let impButtom = document.querySelectorAll('.mark-list__item');
 let todoList = []; // массив хранения объектов ввода
 
 // отображение данных из локального хранилища
@@ -174,6 +171,9 @@ function activeLink() { // функция примнения активных с
 activeClick();
 
 function activeClick() { // функция применения действий по вкладкам
+  let textMark = document.querySelectorAll('.unmarktext');
+  let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
+  let impButtom = document.querySelectorAll('.mark-list__item');
 
   listItems.forEach((item) => { // перебираем их
 
@@ -194,20 +194,19 @@ function activeClick() { // функция применения действий
       item.addEventListener('click', function (elem) {
         delForm.style.display = 'none';
         impButtom.forEach(function (elem) {
-          elem.style.visibility = 'hidden';
+          elem.style.visibility = 'hidden'; // скрываем кнопку
         });
-
         textMark.forEach(function (element) {
-          if (element.classList.contains(' unmarktext') !== false) {
-            element.parentElement.style.display = 'flex';
-            console.log()
-          } else {
+          if (element.classList.contains(' unmarktext')) {
             element.parentElement.style.display = 'none';
+          } else {
+            element.parentElement.style.display = 'flex';
           }
         });
 
       });
     }
+
 
     if (item.parentElement.id === 'active') {
       item.addEventListener('click', function () {
@@ -215,20 +214,13 @@ function activeClick() { // функция применения действий
         impButtom.forEach(function (elem) {
           elem.style.visibility = 'visible';
         });
-
-
         textMark.forEach(function (element) {
-          console.log(element)
-          // if (element.classList.contains(' unmarktext')) {
-          //   console.log('false')
-
-          //   element.parentElement.style.display = 'flex';
-          // } else {
-          //   element.parentElement.style.display = 'none';
-          //   console.log('true')
-          // }
+          if (element.classList.contains(' unmarktext')) {
+            element.parentElement.style.display = 'flex';
+          } else {
+            element.parentElement.style.display = 'none';
+          }
         });
-
       });
     }
   });
