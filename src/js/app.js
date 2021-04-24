@@ -67,7 +67,6 @@ allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
   const listItems = document.querySelectorAll('.main-list__item');
-
   listItems.forEach((item) => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
@@ -83,8 +82,6 @@ function delMessage(buttonClick) { // функция удаления сообщ
       parentId.remove();
       // eslint-disable-next-line no-undef
       localSave();
-      // eslint-disable-next-line no-undef,no-restricted-globals
-      location.reload();
     });
 }
 
@@ -135,11 +132,13 @@ function siteSearch() { // функция поиска
           // eslint-disable-next-line no-param-reassign
           element.style.display = 'none'; // убираем не подходящие блоки
         } else {
+          // eslint-disable-next-line no-param-reassign
           element.style.display = 'flex';
         }
       });
     } else {
       itemsSerch.forEach(function (element) {
+        // eslint-disable-next-line no-param-reassign
         element.style.display = 'flex'; // возвращаем обратное значение
       });
     }
@@ -165,17 +164,20 @@ function activeLink() { // функция примнения активных с
 activeClick();
 
 function activeClick() { // функция применения действий по вкладкам
-  let delForm = document.querySelector('#taskform');
-  let textMark = document.querySelectorAll('.unmarktext');
-  let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
-  let impButtom = document.querySelectorAll('.mark-list__item');
+  const delForm = document.querySelector('#taskform');
+  const textMark = document.querySelectorAll('.unmarktext');
+  const listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
+  const impButtom = document.querySelectorAll('.mark-list__item');
+
 
   listItems.forEach((item) => { // перебираем их
+    // eslint-disable-next-line no-param-reassign
     item.parentElement.style.display = 'flex';
     if (item.parentElement.id === 'all') { // проверка по id
       item.addEventListener('click', function () {
         delForm.style.display = 'block';
-        impButtom.forEach(function(elem) {
+        impButtom.forEach(function (elem) {
+          // eslint-disable-next-line no-param-reassign
           elem.style.visibility = 'visible';
         });
         textMark.forEach(function (element) {
@@ -187,21 +189,34 @@ function activeClick() { // функция применения действий
     if (item.parentElement.id === 'done') {
       item.addEventListener('click', function () {
         delForm.style.display = 'none';
-        impButtom.forEach(function(elem) {
+        impButtom.forEach(function (elem) {
           elem.style.visibility = 'hidden';
         });
+
+
+        textMark.forEach(function (element) {
+          if (element.classList.contains(' unmarktext') === false) {
+            element.parentElement.style.display = 'flex';
+            console.log()
+          } else {
+            element.parentElement.style.display = 'none';
+          }
+        });
+
+
+
       });
     }
 
     if (item.parentElement.id === 'active') {
       item.addEventListener('click', function () {
         delForm.style.display = 'block';
-        impButtom.forEach(function(elem) {
+        impButtom.forEach(function (elem) {
           elem.style.visibility = 'visible';
         });
         textMark.forEach(function (element) {
           if (element.classList.contains(' unmarktext')) {
-            element.parentElement.style.display = 'flex';
+            element.parentElement.style.overflow = 'flex';
           } else {
             element.parentElement.style.display = 'none';
           }
