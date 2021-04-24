@@ -1,9 +1,9 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-let btn = document.querySelector('#btn'); // кнопка добавить
-let inputMsg = document.querySelector('#input'); // поле ввода
-let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+const btn = document.querySelector('#btn'); // кнопка добавить
+const inputMsg = document.querySelector('#input'); // поле ввода
+const todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
 
 // отображение данных из локального хранилища
@@ -37,12 +37,12 @@ function saveInput() {
       };
 
       todoList.unshift(todoMessage); // добавляем объект в массив
-      localSave(); // вызываем функцию сохранения
       vievTodoList(); // вызываем функцию отображения при клике
+      localSave(); // вызываем функцию сохранения
       inputMsg.value = ''; // очищаем значение ввода
       // eslint-disable-next-line no-empty
     } else {
-      return;
+
     }
   });
 }
@@ -66,7 +66,7 @@ function vievTodoList() {
 allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
-  let listItems = document.querySelectorAll('.main-list__item');
+  const listItems = document.querySelectorAll('.main-list__item');
 
   listItems.forEach((item) => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
@@ -76,10 +76,9 @@ function allListens() { // функция поиска кликов по все�
 }
 
 function delMessage(buttonClick) { // функция удаления сообщений
-
   buttonClick.querySelector('.del_button')
     .addEventListener('click', function (event) {
-      let parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
+      const parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
       todoList.splice(parentId.attributes.id.value, 1); // индекс по id для удаления
       parentId.remove();
       // eslint-disable-next-line no-undef
@@ -127,13 +126,14 @@ siteSearch();
 
 function siteSearch() { // функция поиска
   document.querySelector('#header__id').oninput = function () {
-    let value = this.value.trim(); // значение ввода
-    let itemsSerch = document.querySelectorAll('#todoList li');
+    const value = this.value.trim(); // значение ввода
+    const itemsSerch = document.querySelectorAll('#todoList li');
     if (value !== '') {
       itemsSerch.forEach(function (element) {
-
+        // eslint-disable-next-line eqeqeq
         if (element.innerText.search(value) == -1) {
-          element.style.display = 'none'; //убираем не подходящие блоки
+          // eslint-disable-next-line no-param-reassign
+          element.style.display = 'none'; // убираем не подходящие блоки
         } else {
           element.style.display = 'flex';
         }
@@ -149,14 +149,15 @@ function siteSearch() { // функция поиска
 activeLink();
 
 function activeLink() { // функция примнения активных стилей ко вкладкам в гланом меню
-  let listItem = document.getElementById('list'); // находим список
-  let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
+  const listItem = document.getElementById('list'); // находим список
+  const listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
-    listITems[i].addEventListener("click", function () {
-      let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
-      elem[0].className = listITems[0].className.replace(" active", "");
-      this.className += " active"; // присваиваем по клику активный класс текущему элементу
+    listITems[i].addEventListener('click', function () {
+      const elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
+      elem[0].className = listITems[0].className.replace(' active', '');
+      this.className += ' active'; // присваиваем по клику активный класс текущему элементу
     });
   }
 }
@@ -174,35 +175,30 @@ function activeClick() { // функция применения действий
     if (item.parentElement.id === 'all') { // проверка по id
       item.addEventListener('click', function () {
         delForm.style.display = 'block';
-        impButtom.forEach(function(elem){
-          elem.style.display = 'block';
-        })
+        impButtom.forEach(function(elem) {
+          elem.style.visibility = 'visible';
+        });
         textMark.forEach(function (element) {
-          element.parentElement.style.display = 'flex';   
-        })
+          element.parentElement.style.display = 'flex';
+        });
       });
     }
 
     if (item.parentElement.id === 'done') {
       item.addEventListener('click', function () {
         delForm.style.display = 'none';
-        impButtom.forEach(function(elem){
-          elem.style.display = 'none';
-        })
-        
-        
-
-
+        impButtom.forEach(function(elem) {
+          elem.style.visibility = 'hidden';
+        });
       });
     }
 
     if (item.parentElement.id === 'active') {
       item.addEventListener('click', function () {
         delForm.style.display = 'block';
-        impButtom.forEach(function(elem){
-          elem.style.display = 'block';
-        })
-  
+        impButtom.forEach(function(elem) {
+          elem.style.visibility = 'visible';
+        });
         textMark.forEach(function (element) {
           if (element.classList.contains(' unmarktext')) {
             element.parentElement.style.display = 'flex';
@@ -214,5 +210,3 @@ function activeClick() { // функция применения действий
     }
   });
 }
-
-
