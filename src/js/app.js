@@ -17,7 +17,6 @@ function getLocal() {
   }
 }
 
-
 // создаем функцию для сохраниния данных в локал
 function localSave() {
   localStorage.setItem('todoList', JSON.stringify(todoList));
@@ -29,22 +28,17 @@ saveInput();
 function saveInput() {
 
   btn.addEventListener('click', function () {
-
     if (!inputMsg.value) return; // проверка ввода пустой строки
-
     let todoMessage = { // объект сообщения
       todo: inputMsg.value,
       checked: false,
       mark: false,
     };
-
     todoList.unshift(todoMessage); // добавляем объект в массив
-
     vievTodoList(); // вызываем функцию отображения при клике
     inputMsg.value = ''; // очищаем значение ввода
     localSave(); // вызываем функцию сохранения
     allListens();
-
   });
 }
 
@@ -75,34 +69,34 @@ function allListens() { // функция поиска кликов по все�
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
     activeClick();
-
-
   });
 }
 
 function delMessage(buttonClick) { // функция удаления сообщений
-  buttonClick.querySelector('.del_button')
-    .addEventListener('click', function (event) {
-      const parentId = event.target.parentElement.parentElement; //  находим родительский блок для удаления
-      todoList.splice(parentId.attributes.id.value, 1); // индекс по id для удаления
-      parentId.remove();
-      // eslint-disable-next-line no-undef
-      localSave();
-    });
+  buttonClick.querySelector('.del_button').addEventListener('click', function (event) {
+    let parentElement = event.target.parentElement.parentElement; //  находим родительский блок для удаления
+    let itemIndex = parentElement.getAttribute('id');
+    parentElement.remove();
+    for (let i = +itemIndex + 1; i < todoList.length; i++) {
+      document.getElementById(i).setAttribute('id', i - 1);
+    }
+    todoList.splice(itemIndex, 1);
+    localSave();
+  });
 }
+
+
 
 function markText(buttonClick) { // функция проверки примененныйх стилей по клику (включение,отключение)
   buttonClick.querySelector('.mark-list__item')
     .addEventListener('click', function (item) {
       if (item.target.classList.contains('mark-list__item--active')) { // выполняем проверку по наличию класса на элементе
         item.target.classList.remove('mark-list__item--active');
-        // eslint-disable-next-line no-param-reassign
         item.target.innerHTML = 'IMPORTANT';
         item.target.previousElementSibling.classList.remove('text-list__item--active');
         todoList[item.target.parentElement.id].mark = false;
       } else {
         item.target.classList.add('mark-list__item--active');
-        // eslint-disable-next-line no-param-reassign
         item.target.innerHTML = 'NOT IMPORTANT';
         item.target.previousElementSibling.classList.add('text-list__item--active');
         todoList[item.target.parentElement.id].mark = true;
@@ -135,16 +129,13 @@ function siteSearch() { // функция поиска
       itemsSerch.forEach(function (element) {
         // eslint-disable-next-line eqeqeq
         if (element.innerText.search(value) == -1) {
-          // eslint-disable-next-line no-param-reassign
           element.style.display = 'none'; // убираем не подходящие блоки
         } else {
-          // eslint-disable-next-line no-param-reassign
           element.style.display = 'flex';
         }
       });
     } else {
       itemsSerch.forEach(function (element) {
-        // eslint-disable-next-line no-param-reassign
         element.style.display = 'flex'; // возвращаем обратное значение
       });
     }
@@ -158,7 +149,6 @@ function activeLink() { // функция примнения активных с
   let listItem = document.getElementById('list'); // находим список
   let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
 
-  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
     listITems[i].addEventListener('click', function () {
       let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
@@ -196,13 +186,10 @@ function activeClick() { // функция применения действий
         impButtom.forEach(function (elem) {
           elem.style.visibility = 'hidden'; // скрываем кнопку
         });
-        textMark.forEach(function (element) {
-          if (element.classList.contains(' unmarktext')) {
-            element.parentElement.style.display = 'none';
-          } else {
-            element.parentElement.style.display = 'flex';
-          }
-        });
+        todo.classList.add('unmarktext');
+        todo.classList.remove('todo-list--active');
+        todo.classList.remove('todo-list--all');
+
 
       });
     }
