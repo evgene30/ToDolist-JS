@@ -68,7 +68,6 @@ function allListens() { // функция поиска кликов по все�
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
-    activeClick();
   });
 }
 
@@ -160,57 +159,42 @@ function activeLink() { // функция примнения активных с
 
 activeClick();
 
-function activeClick() { // функция применения действий по вкладкам
-  let textMark = document.querySelectorAll('.unmarktext');
-  let listItems = document.querySelectorAll('.header-nav-menu__link li a'); // находим необходимые ссылки
+function activeClick() {
+  let listItems = document.querySelectorAll('.main-list__items li');
   let impButtom = document.querySelectorAll('.mark-list__item');
 
-  listItems.forEach((item) => { // перебираем их
 
-    if (item.parentElement.id === 'all') { // проверка по id
-      item.addEventListener('click', function () {
-        delForm.style.display = 'block';
-        impButtom.forEach(function (elem) {
-          elem.style.visibility = 'visible';
-        });
-        textMark.forEach(function (element) {
-          element.parentElement.style.display = 'flex';
-        });
-      });
-    }
+  document.getElementById('all').addEventListener('click', function () {
 
-
-    if (item.parentElement.id === 'done') {
-      item.addEventListener('click', function (elem) {
-        delForm.style.display = 'none';
-        impButtom.forEach(function (elem) {
-          elem.style.visibility = 'hidden'; // скрываем кнопку
-        });
-        todo.classList.add('unmarktext');
-        todo.classList.remove('todo-list--active');
-        todo.classList.remove('todo-list--all');
-
-
-      });
-    }
-
-
-    if (item.parentElement.id === 'active') {
-      item.addEventListener('click', function () {
-        delForm.style.display = 'block';
-        impButtom.forEach(function (elem) {
-          elem.style.visibility = 'visible';
-        });
-        textMark.forEach(function (element) {
-          if (element.classList.contains(' unmarktext')) {
-            element.parentElement.style.display = 'flex';
-          } else {
-            element.parentElement.style.display = 'none';
-          }
-        });
-      });
-    }
+    listItems.forEach(function (element) {
+      element.style.display = 'flex';
+    });
   });
+
+
+  document.getElementById('active').addEventListener('click', function () {
+
+    listItems.forEach(function (element) {
+      if (element.children[0].classList.contains('unmarktext')) {
+        element.style.display = 'none';
+      } else {
+        element.style.display = 'flex';
+      }
+    })
+  });
+
+
+  document.getElementById('done').addEventListener('click', function () {
+ 
+    listItems.forEach(function (element) {
+      if (element.children[0].classList.contains('unmarktext')) {
+        element.style.display = 'flex';
+      } else {
+        element.style.display = 'none';
+      }
+    })
+  });
+
 }
 
 
