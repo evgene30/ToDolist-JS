@@ -4,7 +4,6 @@ import '../scss/app.scss';
 let btn = document.querySelector('#btn'); // кнопка добавить
 let inputMsg = document.querySelector('#input'); // поле ввода
 let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
-let delForm = document.querySelector('#taskform');
 let todoList = []; // массив хранения объектов ввода
 
 // отображение данных из локального хранилища
@@ -160,41 +159,47 @@ function activeLink() { // функция примнения активных с
 activeClick();
 
 function activeClick() {
-  let listItems = document.querySelectorAll('.main-list__items li');
-  let impButtom = document.querySelectorAll('.mark-list__item');
-
+let delForm = document.querySelector('#taskform'); //находим форму
+let listItems = document.querySelectorAll('.main-list__items li'); // находим все элементы списка
+let impButtom = document.querySelectorAll('.mark-list__item'); // находим кнопки
 
   document.getElementById('all').addEventListener('click', function () {
-
+    delForm.style.display = 'block'; // не скрываем блок ввода
+    impButtom.forEach(function(elem){
+      elem.style.visibility = 'visible'; // не скрываем кнопку важности
+    })
     listItems.forEach(function (element) {
-      element.style.display = 'flex';
+      element.style.display = 'flex'; // отображаем все элементы списка
     });
   });
 
-
   document.getElementById('active').addEventListener('click', function () {
-
+    delForm.style.display = 'block';
+    impButtom.forEach(function(elem){
+      elem.style.visibility = 'visible';
+    })
     listItems.forEach(function (element) {
-      if (element.children[0].classList.contains('unmarktext')) {
-        element.style.display = 'none';
+      if (element.children[0].classList.contains('unmarktext')) { // проверяем элемент на наличие стиля перечеркивания
+        element.style.display = 'none'; 
       } else {
-        element.style.display = 'flex';
+        element.style.display = 'flex'; // отображаем элемент
       }
     })
   });
-
 
   document.getElementById('done').addEventListener('click', function () {
- 
+    delForm.style.display = 'none'; // скрываем поле ввода
+    impButtom.forEach(function(elem){
+      elem.style.visibility = 'hidden'; // скрываем кнопку важности
+    })
     listItems.forEach(function (element) {
       if (element.children[0].classList.contains('unmarktext')) {
-        element.style.display = 'flex';
+        element.style.display = 'flex'; // отображаем выполненные задания
       } else {
         element.style.display = 'none';
       }
     })
   });
-
 }
 
 
