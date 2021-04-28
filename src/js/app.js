@@ -160,13 +160,13 @@ function activeLink() { // функция примнения активных с
 activeClick();
 
 function activeClick() {
-let delForm = document.querySelector('#taskform'); //находим форму
-let listItems = document.querySelectorAll('.main-list__items li'); // находим все элементы списка
-let impButtom = document.querySelectorAll('.mark-list__item'); // находим кнопки
+  let delForm = document.querySelector('#taskform'); //находим форму
+  let listItems = document.querySelectorAll('.main-list__items li'); // находим все элементы списка
+  let impButtom = document.querySelectorAll('.mark-list__item'); // находим кнопки
 
   document.getElementById('all').addEventListener('click', function () {
     delForm.style.display = 'block'; // не скрываем блок ввода
-    impButtom.forEach(function(elem){
+    impButtom.forEach(function (elem) {
       elem.style.visibility = 'visible'; // не скрываем кнопку важности
     })
     listItems.forEach(function (element) {
@@ -176,12 +176,12 @@ let impButtom = document.querySelectorAll('.mark-list__item'); // находим
 
   document.getElementById('active').addEventListener('click', function () {
     delForm.style.display = 'block';
-    impButtom.forEach(function(elem){
+    impButtom.forEach(function (elem) {
       elem.style.visibility = 'visible';
     })
     listItems.forEach(function (element) {
       if (element.children[0].classList.contains('unmarktext')) { // проверяем элемент на наличие стиля перечеркивания
-        element.style.display = 'none'; 
+        element.style.display = 'none';
       } else {
         element.style.display = 'flex'; // отображаем элемент
       }
@@ -190,7 +190,7 @@ let impButtom = document.querySelectorAll('.mark-list__item'); // находим
 
   document.getElementById('done').addEventListener('click', function () {
     delForm.style.display = 'none'; // скрываем поле ввода
-    impButtom.forEach(function(elem){
+    impButtom.forEach(function (elem) {
       elem.style.visibility = 'hidden'; // скрываем кнопку важности
     })
     listItems.forEach(function (element) {
@@ -203,4 +203,24 @@ let impButtom = document.querySelectorAll('.mark-list__item'); // находим
   });
 }
 
+notHover(); // проверка на наличие тачскрина
+
+function notHover() {
+  let btn = document.querySelectorAll('li');
+
+
+  if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+    console.log('this is a touch device');
+   
+    console.log(btn)
+    // mid.forEach(function (event) {
+    //   if (event.classList.contains('main-list__item')) {
+    //     event.classList.remove('main-list__item');
+    //     event.classList.add('main-list__item-m');
+    //   }
+
+    // });
+
+  }
+}
 
