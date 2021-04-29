@@ -14,20 +14,13 @@ siteSearch(); // поиск на сайте
 allListens(); // функция поиска кликов (прослушивание элементов) блока сообщений
 saveInput(); // формирование и сохранение объекта сообщения
 
+
 function getLocal() {
-  if (localStorage.getItem('todoList') != undefined) {
-    todoList = JSON.parse(localStorage.getItem('todoList')); // получаем данные из хранилища и преобразовывам в массив
-    vievTodoList(); // вызываем функцию отображения
-  }
+  const data = localStorage.getItem('todoList'); // получили данные
+  if (!data) return; // седалли негативную проверку и сразу return
+  todoList = JSON.parse(data);
+  vievTodoList(); // передали значение в другую функцию
 }
-
-// function getLocal() {
-//   const data = localStorage.getItem('todoList'); // получили данные
-
-//   if (!data) return; // седалли негативную проверку и сразу return
-
-//   vievTodoList(JSON.parse(data)); // передали значение в другую функцию
-// }
 
 
 // создаем функцию для сохраниния данных в локал
@@ -215,27 +208,17 @@ function activeClick() {
   });
 }
 
-notHover(); // проверка на наличие тачскрина
 
-function notHover() {
-  let li = document.querySelectorAll('main-list__item');
 
-  if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-    console.log('this is a touch device');
 
-    li.forEach((event) => {
-      console.log(event)
+// notHover(); // проверка на наличие тачскрина
 
-    })
-
-    // mid.forEach(function (event) {
-    //   if (event.classList.contains('main-list__item')) {
-    //     event.classList.remove('main-list__item');
-    //     event.classList.add('main-list__item-m');
-    //   }
-
-    // });
-
-  }
-}
+// function notHover() {
+//   if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+//     console.log('this is a touch device');
+//     document.body.classList.add('no-batch');
+//   } else {
+//     console.log('this is not a touch device');
+//   }
+// }
 
