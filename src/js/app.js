@@ -6,8 +6,13 @@ let inputMsg = document.querySelector('#input'); // поле ввода
 let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
 
-// отображение данных из локального хранилища
-getLocal();
+
+getLocal(); // отображение данных из локального хранилища
+activeClick(); // действия по вкладкам в приложении
+activeLink(); // функция примнения активных стилей ко вкладкам в гланом меню
+siteSearch(); // поиск на сайте
+allListens(); // функция поиска кликов (прослушивание элементов) блока сообщений
+saveInput(); // формирование и сохранение объекта сообщения
 
 function getLocal() {
   if (localStorage.getItem('todoList') != undefined) {
@@ -16,13 +21,14 @@ function getLocal() {
   }
 }
 
+
 // создаем функцию для сохраниния данных в локал
 function localSave() {
   localStorage.setItem('todoList', JSON.stringify(todoList));
 }
 
 // создаем функцию для воода и сохранения значений, и их отображения в теле документа
-saveInput();
+
 
 function saveInput() {
 
@@ -37,7 +43,7 @@ function saveInput() {
     vievTodoList(); // вызываем функцию отображения при клике
     inputMsg.value = ''; // очищаем значение ввода
     localSave(); // вызываем функцию сохранения
-    allListens();
+    allListens(); // вызываем функцию прослушивания кликов блока сообщений
   });
 }
 
@@ -59,7 +65,6 @@ function vievTodoList() {
   });
 }
 
-allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
   const listItems = document.querySelectorAll('.main-list__item');
@@ -67,7 +72,7 @@ function allListens() { // функция поиска кликов по все�
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
-    activeClick();
+    activeClick(); // перечеркивание сообщения
   });
 }
 
@@ -118,14 +123,14 @@ function unMarkText(blockClick) { // функция перечеркивания
     });
 }
 
-siteSearch();
+
 
 function siteSearch() { // функция поиска
-  document.querySelector('#header__id').oninput = () => {
+  document.querySelector('#header__id').oninput = function () {
     const value = this.value.trim(); // значение ввода
     const itemsSerch = document.querySelectorAll('#todoList li');
     if (value !== '') {
-      itemsSerch.forEach((element)=> {
+      itemsSerch.forEach((element) => {
         if (element.innerText.search(value) == -1) {
           element.style.display = 'none'; // убираем не подходящие блоки
         } else {
@@ -141,14 +146,14 @@ function siteSearch() { // функция поиска
 }
 inputMsg.addEventListener("input", siteSearch); // отфильтровка остаточных значений
 
-activeLink();
+
 
 function activeLink() { // функция примнения активных стилей ко вкладкам в гланом меню
   let listItem = document.getElementById('list'); // находим список
   let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
 
   for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
-    listITems[i].addEventListener('click',  () => {
+    listITems[i].addEventListener('click',  function() {
       let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
       elem[0].className = listITems[0].className.replace(' active', '');
       this.className += ' active'; // присваиваем по клику активный класс текущему элементу
@@ -156,7 +161,7 @@ function activeLink() { // функция примнения активных с
   }
 }
 
-activeClick();
+
 
 function activeClick() {
   let delForm = document.querySelector('#taskform'); //находим форму
