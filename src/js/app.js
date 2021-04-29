@@ -26,8 +26,8 @@ saveInput();
 
 function saveInput() {
 
-  btn.addEventListener('click', function () {
-    if (!inputMsg.value) return; // проверка ввода пустой строки
+  btn.addEventListener('click', () => {
+    if (!inputMsg.value || inputMsg.value[0] === ' ') return inputMsg.value = ''; // проверка ввода пустой строки и пробелов
     let todoMessage = { // объект сообщения
       todo: inputMsg.value,
       checked: false,
@@ -46,7 +46,7 @@ function saveInput() {
 function vievTodoList() {
   todoBlock.innerHTML = '';
 
-  todoList.forEach(function (item, index) { // перебираем элементы, и добавляем id
+  todoList.forEach((item, index) => { // перебираем элементы, и добавляем id
     todoBlock.innerHTML += `
       <li tabindex="0" class="main-list__item" id = "${index}"> 
           <div tabindex="-1" class="text ${item.checked ? 'unmarktext' : ''} ${item.mark ? 'text-list__item--active' : ''}"><p>${item.todo}</p></div>
@@ -63,7 +63,7 @@ allListens();
 
 function allListens() { // функция поиска кликов по всему блоку сообщений
   const listItems = document.querySelectorAll('.main-list__item');
-  listItems.forEach(item => { // перебираем клики на кнопках
+  listItems.forEach((item) => { // перебираем клики на кнопках
     delMessage(item); // удаление сообщений
     markText(item); // применение стилей по клику
     unMarkText(item); // перечеркивание сообщения
@@ -72,7 +72,7 @@ function allListens() { // функция поиска кликов по все�
 }
 
 function delMessage(buttonClick) { // функция удаления сообщений
-  buttonClick.querySelector('.del_button').addEventListener('click', function (event) {
+  buttonClick.querySelector('.del_button').addEventListener('click', (event) => {
     let parentElement = event.target.parentElement.parentElement; //  находим родительский блок для удаления
     let itemIndex = parentElement.getAttribute('id');
     parentElement.remove();
@@ -88,7 +88,7 @@ function delMessage(buttonClick) { // функция удаления сообщ
 
 function markText(buttonClick) { // функция проверки примененныйх стилей по клику (включение,отключение)
   buttonClick.querySelector('.mark-list__item')
-    .addEventListener('click', function (item) {
+    .addEventListener('click', (item) => {
       if (item.target.classList.contains('mark-list__item--active')) { // выполняем проверку по наличию класса на элементе
         item.target.classList.remove('mark-list__item--active');
         item.target.innerHTML = 'IMPORTANT';
@@ -106,7 +106,7 @@ function markText(buttonClick) { // функция проверки примен
 
 function unMarkText(blockClick) { // функция перечеркивания сообщений при клике по блоку с сообщением
   blockClick.querySelector('.text')
-    .addEventListener('click', function (event) {
+    .addEventListener('click', (event) => {
       if (todoList[event.target.parentElement.id].checked === false) {
         event.target.classList.toggle('unmarktext');
         todoList[event.target.parentElement.id].checked = true;
@@ -121,12 +121,11 @@ function unMarkText(blockClick) { // функция перечеркивания
 siteSearch();
 
 function siteSearch() { // функция поиска
-  document.querySelector('#header__id').oninput = function () {
+  document.querySelector('#header__id').oninput = () => {
     const value = this.value.trim(); // значение ввода
     const itemsSerch = document.querySelectorAll('#todoList li');
     if (value !== '') {
-      itemsSerch.forEach(function (element) {
-        // eslint-disable-next-line eqeqeq
+      itemsSerch.forEach((element)=> {
         if (element.innerText.search(value) == -1) {
           element.style.display = 'none'; // убираем не подходящие блоки
         } else {
@@ -134,7 +133,7 @@ function siteSearch() { // функция поиска
         }
       });
     } else {
-      itemsSerch.forEach(function (element) {
+      itemsSerch.forEach((element) => {
         element.style.display = 'flex'; // возвращаем обратное значение
       });
     }
@@ -149,7 +148,7 @@ function activeLink() { // функция примнения активных с
   let listITems = listItem.getElementsByClassName('nonclick'); // находим ссылки по классу
 
   for (let i = 0; i < listITems.length; i++) { // перебираем каждую ссылку в цикле
-    listITems[i].addEventListener('click', function () {
+    listITems[i].addEventListener('click',  () => {
       let elem = listItem.getElementsByClassName('active'); // находим елемент с активным классом
       elem[0].className = listITems[0].className.replace(' active', '');
       this.className += ' active'; // присваиваем по клику активный класс текущему элементу
@@ -164,22 +163,22 @@ function activeClick() {
   let listItems = document.querySelectorAll('.main-list__items li'); // находим все элементы списка
   let impButtom = document.querySelectorAll('.mark-list__item'); // находим кнопки
 
-  document.getElementById('all').addEventListener('click', function () {
+  document.getElementById('all').addEventListener('click', () => {
     delForm.style.display = 'block'; // не скрываем блок ввода
-    impButtom.forEach(function (elem) {
+    impButtom.forEach( (elem) => {
       elem.style.visibility = 'visible'; // не скрываем кнопку важности
     })
-    listItems.forEach(function (element) {
+    listItems.forEach((element) => {
       element.style.display = 'flex'; // отображаем все элементы списка
     });
   });
 
-  document.getElementById('active').addEventListener('click', function () {
+  document.getElementById('active').addEventListener('click', () => {
     delForm.style.display = 'block';
-    impButtom.forEach(function (elem) {
+    impButtom.forEach( (elem) => {
       elem.style.visibility = 'visible';
     })
-    listItems.forEach(function (element) {
+    listItems.forEach((element) => {
       if (element.children[0].classList.contains('unmarktext')) { // проверяем элемент на наличие стиля перечеркивания
         element.style.display = 'none';
       } else {
@@ -188,12 +187,12 @@ function activeClick() {
     })
   });
 
-  document.getElementById('done').addEventListener('click', function () {
+  document.getElementById('done').addEventListener('click',  () => {
     delForm.style.display = 'none'; // скрываем поле ввода
-    impButtom.forEach(function (elem) {
+    impButtom.forEach((elem) => {
       elem.style.visibility = 'hidden'; // скрываем кнопку важности
     })
-    listItems.forEach(function (element) {
+    listItems.forEach((element) => {
       if (element.children[0].classList.contains('unmarktext')) {
         element.style.display = 'flex'; // отображаем выполненные задания
       } else {
@@ -206,13 +205,19 @@ function activeClick() {
 notHover(); // проверка на наличие тачскрина
 
 function notHover() {
-  let btn = document.querySelectorAll('li');
-
+  let li = document.querySelectorAll('main-list__item');
 
   if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
     console.log('this is a touch device');
-   
-    console.log(btn)
+
+    li.forEach((event) => {
+      console.log(event)
+
+    })
+
+
+
+
     // mid.forEach(function (event) {
     //   if (event.classList.contains('main-list__item')) {
     //     event.classList.remove('main-list__item');
