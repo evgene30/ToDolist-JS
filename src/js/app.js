@@ -1,9 +1,9 @@
 import '../scss/app.scss';
 
 // описываем все переменные
-let btn = document.querySelector('#btn'); // кнопка добавить
-let inputMsg = document.querySelector('#input'); // поле ввода
-let todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
+const btn = document.querySelector('#btn'); // кнопка добавить
+const inputMsg = document.querySelector('#input'); // поле ввода
+const todoBlock = document.querySelector('#todoList'); // отображение блока сообщений
 let todoList = []; // массив хранения объектов ввода
 
 
@@ -21,6 +21,14 @@ function getLocal() {
   }
 }
 
+// function getLocal() {
+//   const data = localStorage.getItem('todoList'); // получили данные
+
+//   if (!data) return; // седалли негативную проверку и сразу return
+
+//   vievTodoList(JSON.parse(data)); // передали значение в другую функцию
+// }
+
 
 // создаем функцию для сохраниния данных в локал
 function localSave() {
@@ -34,7 +42,7 @@ function saveInput() {
 
   btn.addEventListener('click', () => {
     if (!inputMsg.value || inputMsg.value[0] === ' ') return inputMsg.value = ''; // проверка ввода пустой строки и пробелов
-    let todoMessage = { // объект сообщения
+    const todoMessage = { // объект сообщения
       todo: inputMsg.value,
       checked: false,
       mark: false,
@@ -164,7 +172,7 @@ function activeLink() { // функция примнения активных с
 
 
 function activeClick() {
-  let delForm = document.querySelector('#taskform'); //находим форму
+  const delForm = document.querySelector('#taskform'); //находим форму
   let listItems = document.querySelectorAll('.main-list__items li'); // находим все элементы списка
   let impButtom = document.querySelectorAll('.mark-list__item'); // находим кнопки
 
@@ -219,9 +227,6 @@ function notHover() {
       console.log(event)
 
     })
-
-
-
 
     // mid.forEach(function (event) {
     //   if (event.classList.contains('main-list__item')) {
